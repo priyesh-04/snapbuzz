@@ -6,7 +6,8 @@ import { CommonModule } from '@angular/common';
 const routes: Routes = [
     {
         path: 'edit/:id',
-        loadChildren: './pages/comment-edit/comment-edit.module#CommentEditModule',
+        // loadChildren: './pages/comment-edit/comment-edit.module#CommentEditModule',
+        loadChildren: () => import('./pages/comment-edit/comment-edit.module').then(m => m.CommentEditModule),
         data: { moduleName: 'comment-edit', preload: true, delay: false },
     }
 ];
