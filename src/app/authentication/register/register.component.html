@@ -1,0 +1,73 @@
+<div class="row" style="margin: 110px 0;">
+  <div class="col-md-6 mx-auto">
+    <div *ngIf="_authService.checkToken() === false">
+    <div class="card rounded-0">
+      <div class="card-header">
+        <h3 class="mb-0">Register</h3>
+      </div>
+      <div class="card-body">
+
+        <form #f="ngForm" (ngSubmit)="registerUser()">
+
+          <div class="register-container form-group">
+            <mat-form-field>
+              <input type="text" matInput class="form-control" [(ngModel)]="userData.firstname"
+                name="firstname" placeholder="Firstname" required>
+            </mat-form-field>
+          </div>
+
+          <div class="register-container form-group">
+            <mat-form-field>
+              <input type="text" matInput #lastname="ngModel" class="form-control" [(ngModel)]="userData.lastname"
+                name="lastname" placeholder="Lastname" required>
+            </mat-form-field>
+          </div>
+
+          <div class="register-container form-group">
+            <mat-form-field>
+              <input type="text" matInput class="form-control" [(ngModel)]="userData.username"
+                name="username" placeholder="Enter username" required>
+            </mat-form-field>
+          </div>
+
+          <div class="register-container form-group">
+            <mat-form-field>
+              <input matInput [(ngModel)]="userData.email" name="email" type="text" class="form-control"
+                placeholder="Enter your email" required email>
+            </mat-form-field>
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+          </div>
+
+          <div class="register-container form-group">
+            <mat-form-field>
+              <input matInput [matDatepicker]="picker" name="date_of_birth" placeholder="Date Of Birth" [(ngModel)]="userData.date_of_birth" class="form-control" required>
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </div>
+
+          <div class="register-container form-group">
+            <mat-form-field>
+              <input #pass="ngModel" matInput [(ngModel)]="userData.password" name="password" type="password"
+                class="form-control" placeholder="Enter Password" required>
+            </mat-form-field>
+            <div class="alert alert-danger" *ngIf="pass.touched && !pass.valid">Password field cannot be left blank.</div>
+          </div>
+
+          <div class="register-container form-group">
+            <mat-form-field>
+              <input #cpass="ngModel" matInput [(ngModel)]="userData.confirm_password" name="confirm_password" type="password"
+                class="form-control" placeholder="Confirm your Password" required>
+            </mat-form-field>
+            <div class="alert alert-danger" *ngIf="cpass.value !== pass.value">Password must match.</div>
+            <div class="alert alert-danger" *ngIf="cpass.touched && !cpass.valid">Password field cannot be left blank.</div>
+          </div>
+
+          <button type="submit" class="btn btn-primary float-right" [disabled]="!f.form.valid">Register</button>
+
+        </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

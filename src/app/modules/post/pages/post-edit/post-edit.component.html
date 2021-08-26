@@ -1,0 +1,56 @@
+<div fxLayout="row" fxLayoutAlign="space-around center" style="height:100%" *ngIf="isLoading">
+    <mat-spinner mode="indeterminate" diameter="50" strokeWidth="5" color="warn"></mat-spinner>
+    <!-- <mat-progress-bar mode="indeterminate"></mat-progress-bar> -->
+</div>
+<div class="container" style="height: 100%;margin-bottom: 120px;" *ngIf="!isLoading">
+    <form style="margin-top: 15vh;align-items: center;">
+        <div class="form-group">
+
+            <div class="textarea-div mb-5">
+                <input type="text" placeholder="What are you thinking..." #post="ngModel" [(ngModel)]="contentData.caption" name="caption" id="post_caption">
+
+                <a class="btn btn-secondary float-right ml-3 mt-3" routerLink="/post">Cancel</a>
+                <button type="button" class="btn btn-danger float-right ml-3 mt-3" (click)=deletePost()>delete</button>
+                <button type="button" class="btn btn-success float-right ml-3 mt-3" (click)="editPost()">update</button>
+
+                <!-- emoji starts-->
+                <mat-icon class="emoji-icon" (click)="toggleEmoji()">sentiment_very_satisfied</mat-icon>
+                <emoji-mart id="emojiID" class="emoji-toggle" (emojiSelect)="addEmoji($event)" title="Pick your emoji…" emoji="point_up"
+                    color="green">
+                </emoji-mart>
+
+                <!-- emoji ends -->
+
+            </div>
+            <div style="width: 20%;">
+                <input type="file" #Image accept="image/*" multiple="false" (change)="fileChangeEvent($event)"
+                    style="display: none">
+                <a (click)="Image.click()" style="cursor: pointer">
+                  <mat-icon>add_a_photo</mat-icon>
+                  <span style="position:absolute;padding-top: 3px;">Change photo</span>
+                </a>
+
+                <!-- image cropper starts -->
+                <img [src]="croppedImage" style="width: 100%;max-width: 250px;" />
+                <div>
+                    <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true"
+                        [aspectRatio]="1 / 1" [resizeToWidth]="1080" [resizeToHeight]="1080" [cropperMinWidth]="128"
+                        [onlyScaleDown]="true" [roundCropper]="false" format="jpg" outputType="base64"
+                        (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()"
+                        (cropperReady)="cropperReady()" (loadImageFailed)="loadImageFailed()"
+                        [style.display]="showCropper ? null : 'none'" [alignImage]="'left'"></image-cropper>
+
+                    <button (click)="flipHorizontal()">Flip horizontal</button>
+                    <button (click)="flipVertical()">Flip vertical</button>
+                    <button (click)="rotateRight()">Rotate right</button>
+                    <button (click)="rotateLeft()">Rotate left</button>
+
+                </div>
+                <!-- <img [src]="croppedImage" /> -->
+                <!-- image cropper ends  -->
+                <br />
+            </div>
+        </div>
+    </form>
+
+</div>

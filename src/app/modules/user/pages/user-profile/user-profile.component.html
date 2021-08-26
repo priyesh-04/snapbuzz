@@ -1,0 +1,211 @@
+<div fxLayout="row" fxLayoutAlign="space-around center" style="height:100%" *ngIf="isLoading">
+    <mat-spinner mode="indeterminate" diameter="50" strokeWidth="5" color="warn"></mat-spinner>
+    <!-- <mat-progress-bar mode="indeterminate"></mat-progress-bar> -->
+</div>
+<section class="header" style="margin: 120px 0" *ngIf="!isLoading">
+    <div class="container ">
+        <div class="text-center mb-2">
+            <a data-toggle="modal" data-target="#changePicModal">
+                <img *ngIf="!user.profile_image" class="profile-img" src="https://i.imgur.com/7ja5jYs.png">
+                <img *ngIf="user.profile_image" class="profile-img" [src]="user.profile_image">
+                <mat-icon class="upload-icon">photo_camera</mat-icon>
+            </a>
+
+            <!-- modal starts-->
+            <div class="modal fade" id="changePicModal" tabindex="-1" role="dialog" aria-labelledby="changePicModalTitle"
+                aria-hidden="true" *ngIf="username === userLoggedIn">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title text-center" id="exampleModalLongTitle">Change Profile Photo</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <ul class="list-unstyled">
+                                <li>
+                                    <input type="file" #Image accept="image/*" multiple="false" (change)="onImageSelect($event)" style="display: none">
+                                    <a class="font-weight-bold" (click)="Image.click()" data-dismiss="modal" aria-label="Close" style="cursor: pointer">
+                                        Upload Photo
+                                    </a>
+                                </li> <hr />
+                                <li>
+                                    <a class="font-weight-bold text-danger" data-dismiss="modal" aria-label="Close" (click)="removePhoto()" style="cursor: pointer">
+                                        Remove Current Photo
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- modal ends -->
+        </div>
+        <div class="username-div bg-light mb-2" fxLayout="column" fxLayoutAlign="center center">
+            <h1 class="full-name">{{user.firstname}} {{user.lastname}}</h1>
+            <h2 class="username-text mb-2">@{{user.username}}</h2>
+
+            <a *ngIf="username === userLoggedIn" class="btn btn-primary" style="width: 50%;"
+                [routerLink]="[ '/accounts/edit' ]">
+                Edit Profile
+            </a>
+
+            <a *ngIf="username !== userLoggedIn" class="btn btn-primary text-white btn-follow" style="width: 50%;" (click)="follow(user.username)">Follow</a>
+
+        </div>
+
+        <!-- Modals starts-->
+
+        <!-- Followers Modal -->
+        <div class="modal fade" id="followersModal" tabindex="-1" role="dialog" aria-labelledby="followersModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="followersModalLabel">Followers</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body follow-modal">
+                        <ul *ngFor="let user of followers_list" class="checkuser list-unstyled">
+                            <li fxLayout="row" fxLayoutAlign="space-between start">
+                                <a [routerLink]="[ '/user-profile', user.username ]" class="full-name float-left">
+                                    {{ user.firstname }} {{ user.lastname }} <br />
+                                    <span [routerLink]="[ '/user-profile', user.username ]" class="username">
+                                        @{{ user.username }}
+                                    </span>
+                                </a>
+                                <a *ngIf="user.username !== userLoggedIn" [routerLink]="[ '/user-profile', username ]" class="btn btn-outline-info follow-btn" (click)="follow(user.username)">
+                                    Follow
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- following modal -->
+        <div class="modal fade" id="followingModal" tabindex="-1" role="dialog" aria-labelledby="followingModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="followingModalLabel">Following</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body follow-modal">
+                        <ul *ngFor="let user of following_list" class="list-unstyled" fxLayout="row" fxLayoutAlign="space-between start">
+                            <li>
+                                <a [routerLink]="[ '/user-profile', user.username ]" class="full-name">
+                                {{ user.firstname }} {{ user.lastname }} <br />
+                                    <span [routerLink]="[ '/user-profile', user.username ]" class="username">
+                                        @{{ user.username }}
+                                    </span>
+                                </a>
+                            </li>
+                            <li *ngIf="user.username !== userLoggedIn">
+                                <a class="btn btn-outline-info float-right" [routerLink]="[ '/user-profile', username ]" (click)="follow(user.username)">
+                                    UnFollow
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal ends -->
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup" fxLayout="row"
+                fxLayoutAlign="space-around center">
+                <div class="navbar-nav">
+                    <a class="profile-toolbar">{{posts.length}} Posts</a>
+                    <a class="profile-toolbar" data-toggle="modal" data-target="#followersModal">
+                        {{user.followers_count}} followers
+                    </a>
+                    <a class="profile-toolbar" data-toggle="modal" data-target="#followingModal">
+                        {{user.following_count}} following
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div class="container">
+        <mat-tab-group [dynamicHeight]="true" mat-align-tabs="center">
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    <mat-icon class="example-tab-icon">grid_on</mat-icon>
+                    POSTS
+                </ng-template>
+                <div class="row">
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4 text-center mt-2 mb-2"
+                        *ngFor="let post of posts">
+                        <div class="hovereffect">
+                            <img class="img-responsive post-img" src="{{post.picture}}">
+                            <div class="overlay">
+                                <h2 class="caption">{{post.caption}}</h2>
+                                <a class="info" [routerLink]="[ '/post', post.id ]">View</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </mat-tab>
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    <mat-icon class="example-tab-icon">bookmark_border</mat-icon>
+                    SAVED
+                </ng-template>
+                <ng-template matTabContent mat-tab-label>
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4 text-center mt-2 mb-2"
+                        *ngFor="let bkm of user.bookmarks">
+                            <div class="hovereffect">
+                                <img class="img-responsive post-img" src="{{bkm.picture}}">
+                                <div class="overlay">
+                                    <h2 class="caption">{{bkm.caption}}</h2>
+                                    <a class="info" [routerLink]="[ '/post', bkm.id ]">View</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+            </mat-tab>
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    <mat-icon class="example-tab-icon">person_pin</mat-icon>
+                    TAGGED
+                </ng-template>
+                <div class="row">
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4 text-center mt-2 mb-2" *ngFor="let tag_post of taggedPosts">
+                        <div class="hovereffect">
+                            <img class="img-responsive post-img" src="{{tag_post.picture}}">
+                            <div class="overlay">
+                                <h2 class="caption">{{tag_post.caption}}</h2>
+                                <a class="info" [routerLink]="[ '/post', tag_post.id ]">View</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+</section>

@@ -1,0 +1,44 @@
+.example-card {
+  max-width: 614px;
+  width: 100%;
+  margin-bottom: 50px;
+}
+
+.example-header-image {
+  background-size: cover;
+}
+
+.comment-form {
+  border: 1px solid #808080;
+  padding: 4px;
+}
+
+.comment-input {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  word-spacing: 1.5px;
+  border: none;
+}
+
+.comment-btn {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #3897f0;
+}
+
+.comment-input:focus {
+  outline: none;
+}
+
+.username-span {
+  font-weight: bold;
+  letter-spacing: 1px;
+  color: #000000;
+}
+
+.menuItem {
+   text-decoration: none;
+   color: #000000;
+ }

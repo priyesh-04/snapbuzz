@@ -1,0 +1,126 @@
+<div style="margin-top: -60px;width: 100%;position: fixed;" fxLayoutAlign="center" *ngIf="isLoading">
+    <!-- <mat-spinner mode="indeterminate" color="warn"></mat-spinner> -->
+    <mat-progress-bar mode="indeterminate" color="warn"></mat-progress-bar>
+</div>
+<div class="container" style="margin-top: 120px;">
+    <div fxLayoutAlign="center center">
+        <form class="form-inline my-2 my-lg-0 search-form">
+            <input class="form-control mr-sm-2" (click)="onClick()" type="search" [(ngModel)]="data.search" name="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="onSubmit()">
+                Search
+            </button>
+        </form>
+    </div>
+</div> <hr />
+
+<div class="container" style="margin-bottom: 120px;" *ngIf="!isLoading">
+    <div class="row">
+        <div class="col-lg-4">
+            <div style="height: 100%;">
+                <h5 *ngIf="users.length===0 && searched===true" class="card-title text-center mb-4 mt-4">No Users matched with <span class="text-danger">{{data.search}}</span></h5>
+                <div *ngIf="users.length!==0">
+                    <h5 class="card-title text-center mb-4 mt-4">Users matched with <span class="text-success">{{data.search}}</span></h5>
+                    <mat-card class="example-card">
+                        <div *ngFor="let user of users">
+                            <a class="text-decoration-none" 
+                            [routerLink]="[ '/user-profile', user.username ]">
+                                <mat-card-header>
+                                    <img *ngIf="!user.profile_image" mat-card-avatar class="example-header-image"
+                                        src="https://empty-profile-pic.s3.ap-south-1.amazonaws.com/blank_profile_pic.png">
+                                    <img *ngIf="user.profile_image" mat-card-avatar class="example-header-image"
+                                        src="{{user.profile_image}}">
+                                    <mat-card-title style="color: #000000;">
+                                        {{ user.full_name }}
+                                    </mat-card-title>
+                                    <mat-card-subtitle>@{{ user.username }}</mat-card-subtitle>
+                                </mat-card-header>
+                            </a> <hr />                   
+                        </div>
+                    </mat-card>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-8">
+            <div>
+                <h5 class="mt-4 mb-4 text-center" *ngIf="results.length===0 && searched===true">No Posts matched with <span class="text-danger">{{data.search}}</span></h5>
+                <h5 class="mt-4 mb-4 text-center" *ngIf="results.length!==0">
+                    Posts matched with <span class="text-success">{{data.search}}</span></h5>
+                <div *ngFor="let post of results">
+                    <mat-card class="example-card">
+                        <div>
+                            <a class="text-decoration-none" [routerLink]="[ '/user-profile', post.user.username ]">
+                                <mat-card-header>
+                                    <img *ngIf="!post.user.profile_image" mat-card-avatar class="example-header-image"
+                                        src="https://empty-profile-pic.s3.ap-south-1.amazonaws.com/blank_profile_pic.png">
+                                    <img *ngIf="post.user.profile_image" mat-card-avatar class="example-header-image"
+                                        src="{{post.user.profile_image}}">
+                                    <mat-card-title style="color: #000000;">{{ post.user.full_name }}</mat-card-title>
+                                    <mat-card-subtitle>@{{ post.user.username }}</mat-card-subtitle>
+                                </mat-card-header>
+                            </a>
+                            <div class="float-right" style="margin-top: -70px;">
+                                <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                                    <mat-icon>more_vert</mat-icon>
+                                </button>
+                                <mat-menu #menu="matMenu">
+                                    <a class="menuItem" [routerLink]="[]" mat-menu-item>
+                                        <span>Report inappropriate</span>
+                                    </a>
+                                    <a *ngIf="post.user.username === userLoggedIn"  class="menuItem" [routerLink]="[ '/post', post.id, 'edit']" mat-menu-item>
+                                        <span>Edit</span>
+                                    </a>
+                                    <a class="menuItem" [routerLink]="[ '/post', post.id ]" mat-menu-item>
+                                        <span>Go to post</span>
+                                    </a>
+                                    <a class="menuItem" [routerLink]="[]" mat-menu-item>
+                                        <span>Embed</span>
+                                    </a>
+                                    <a class="menuItem" [routerLink]="[]" mat-menu-item>
+                                        <span>Share</span>
+                                    </a>
+                                    <a class="menuItem" [routerLink]="[]" mat-menu-item>
+                                        <span>Copy Link</span>
+                                    </a>
+                                </mat-menu>
+                            </div>
+        
+                        </div>
+        
+                        <img mat-card-image src="{{post.picture}}" alt="">
+                        <mat-card-actions fxLayout="row" fxLayoutAlign="space-around start">
+                            <a class="text-decoration-none" mat-button (click)="likePost(post.id)">
+                                {{ post.likes }} Likes
+                            </a>
+                            <a class="text-decoration-none" [routerLink]="[ '/post', post.id ]" mat-button>View</a>
+                            <a class="text-decoration-none" mat-button>Share</a>
+                            <a class="text-decoration-none" mat-button (click)="bookmarkPost(post.id)">Bookmark</a>
+                        </mat-card-actions>
+                        <mat-card-content>
+                            <p class="hash">
+                                {{ post.user.username }} {{ post.caption }}
+                            </p>
+                            <p style="color: grey;">{{ post.timesince }}</p>
+                            <span>
+                                <a [routerLink]="[ '/post', post.id ]" style="color: grey;">
+                                    View all {{post.comments_count}} comments
+                                </a>
+                            </span>
+                        </mat-card-content>
+        
+                        <mat-card-footer>
+                            <form class="comment-form" #f="ngForm" fxLayout="row">
+                                <input type="hidden" ngModel="post" name="model_type" required>
+                                <input type="hidden" ngModel="{{ post.id }}" name="object_id" required>
+                                <input type="hidden" class="comment_parent_id" ngModel="" name="parent_id">
+                                <input fxFlex="100%" fxFlexFill [(ngModel)]="commentData.content" name="content"
+                                    class="comment-input" placeholder="Add a comment..." required>
+                                <button type="submit" mat-icon-button class="comment-btn"
+                                    (click)="createComment(f)">Post</button>
+                            </form>
+                        </mat-card-footer>
+                    </mat-card>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,66 @@
+<div style="margin-top: 61px;width: 100%;position: fixed;" *ngIf="isLoading">
+    <!-- <mat-spinner mode="indeterminate" color="warn"></mat-spinner> -->
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</div>
+<div class="container" style="margin-top: 50px;margin-bottom: 110px;" *ngIf="!isLoading">
+    <div class="row pt-5">
+        <div class="col-md-6 mx-auto">
+            <div class="card rounded-0">
+                <div class="card-header">
+                    <h3 class="mb-0">Update Profile</h3>
+                </div>
+                <div class="card-body">
+    
+                    <form #f="ngForm" (ngSubmit)="editUser()" enctype=" multipart/form-data">
+    
+                        <div class="form-group">
+                            <label for="firstname">firstname</label>
+                            <input type="text" #firstname="ngModel" class="form-control rounded-0"
+                                [(ngModel)]="userData.firstname" name="firstname" placeholder="Enter firstname" required>
+                            <div class="alert alert-danger" *ngIf="firstname.touched  && !firstname.valid">Invalid
+                                firstname or field left
+                                blank!</div>
+                        </div>
+    
+                        <div class="form-group">
+                            <label for="lastname">lastname</label>
+                            <input type="text" #lastname="ngModel" class="form-control rounded-0"
+                                [(ngModel)]="userData.lastname" name="lastname" placeholder="Enter lastname" required>
+                            <div class="alert alert-danger" *ngIf="lastname.touched  && !lastname.valid">Invalid
+                                lastname or field left
+                                blank!</div>
+                        </div>
+    
+                        <div class="form-group">
+                            <label for="username">username</label>
+                            <input type="text" #username="ngModel" class="form-control rounded-0"
+                                [(ngModel)]="userData.username" name="username" placeholder="Enter username" required>
+                            <div class="alert alert-danger" *ngIf="username.touched  && !username.valid">Invalid
+                                username or field left
+                                blank!</div>
+                        </div>
+    
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input #email="ngModel" [(ngModel)]="userData.email" name="email" type="text"
+                                class="form-control rounded-0" placeholder="Enter email" required email>
+                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
+                                else.</small>
+                            <div class="alert alert-danger" *ngIf="email.touched  && !email.valid">Invalid Email or
+                                field left blank!</div>
+                        </div>
+    
+                        <div class="form-group">
+                            <label for="date_of_birth">date_of_birth</label>
+                            <input #DOB="ngModel" [(ngModel)]="userData.date_of_birth" class="form-control rounded-0"
+                                type="date" name="date_of_birth" value="" id="date_of_birth_id">
+                        </div>
+    
+                        <button type="submit" class="btn btn-primary float-right ml-3">Save</button>
+                        <a class="btn btn-danger float-right" [routerLink]="[ '/user-profile', userLoggedIn ]">Cancel</a>
+    
+                    </form>
+                </div>
+            </div>
+        </div>
+</div>

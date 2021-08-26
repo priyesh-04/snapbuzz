@@ -1,0 +1,21 @@
+<mat-toolbar class="footer">
+    <mat-toolbar-row>
+        <div fxFlex fxLayout="row" fxLayoutAlign="space-around center">
+            <a [routerLink]="[ '/post' ]">
+                <mat-icon>home</mat-icon>
+            </a>
+            <a [routerLink]="[ '/search' ]">
+                <mat-icon>search</mat-icon>
+            </a>
+            <a [routerLink]="[ '/post', 'create' ]">
+                <mat-icon>add_a_photo</mat-icon>
+            </a>
+            <!-- <a href="">
+                <mat-icon>favorite_border</mat-icon>
+            </a> -->
+            <a [routerLink]="[ '/user-profile', _authService.userLoggedIn ]">
+                <mat-icon>person</mat-icon>
+            </a>
+        </div>
+    </mat-toolbar-row>
+</mat-toolbar>

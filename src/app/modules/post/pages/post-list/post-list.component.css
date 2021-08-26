@@ -1,0 +1,65 @@
+.example-card {
+  max-width: 614px;
+  width: 100%;
+  margin-bottom: 50px;
+}
+
+.example-header-image {
+  background-size: cover;
+}
+
+.suggestions-profile-image {
+  background-size: cover;
+  max-height: 24px;
+  max-width: 24px;
+}
+
+.comment-form {
+  border: 1px solid #808080;
+  padding: 4px;
+}
+
+.comment-input {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  word-spacing: 1.5px;
+  border: none;
+}
+
+.comment-btn {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #3897f0;
+}
+
+.comment-input:focus {
+  outline: none;
+}
+
+.username-span {
+  font-weight: bold;
+  letter-spacing: 1px;
+  color: #000000;
+}
+
+.menuItem {
+   text-decoration: none;
+   color: #000000;
+ }
+
+ .stories_section {
+   background-color: lightgray;
+   padding: 10px;
+   border-radius: 10px;
+   border: 1px solid grey;
+ }
+
+ .toggle-story {
+   display: none;
+ }
+
+ .toggle-suggestion {
+   display: none;
+ }

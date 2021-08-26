@@ -1,0 +1,14 @@
+<div style="margin-top: 61px;width: 100%;" fxLayoutAlign="center" *ngIf="isLoading">
+    <!-- <mat-spinner mode="indeterminate" color="warn"></mat-spinner> -->
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</div>
+<div class="container jumbotron" style="height: 100%;" *ngIf="!isLoading">
+    <form #f="ngForm" (ngSubmit)="commentEdit(f)" style="margin-top: 30vh;">
+        <div class="form-group">
+            <input [(ngModel)]="contentData.content" name="content" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-primary float-right ml-3" [disabled]="!f.form.valid">Update</button>
+    </form>
+    <button type="submit" class="btn btn-danger float-right ml-3" (click)=deleteComment()>delete</button>
+    <a class="btn btn-primary float-right ml-3" routerLink="/post">Cancel</a>
+</div>

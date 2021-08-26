@@ -1,0 +1,46 @@
+<nav class="navbar main-nav navbar-expand-lg navbar-light bg-light fixed-top">
+  <div class="container">
+    <a class="navbar-brand" routerLink='/'>
+      <i class="fa fa-instagram" aria-hidden="true"></i>
+       Snapbuzz
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav main-nav  ml-auto">
+        <li class="nav-item navbar-nav mr-3 mt-1" *ngIf="_authService.checkToken()">
+          <a class="nav-link" routerLink="/search">
+            <mat-icon>search</mat-icon> Search
+          </a>
+        </li>
+
+        <li class="nav-item navbar-nav">
+          <a class="nav-link" *ngIf="!_authService.checkToken()" routerLink="/login"
+            routerLinkActive="active">Login</a>
+
+          <a class="nav-link" *ngIf="!_authService.checkToken()" routerLink="/register"
+            routerLinkActive="active">Register</a>
+        </li>
+        <li class="nav-item dropdown" *ngIf="_authService.checkToken()">
+          <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            <mat-icon>person</mat-icon>
+            <!-- <img *ngIf="!user.profile_image" class="avatar" src="../../../../../assets/images/blank_profile_pic.png">
+            <img *ngIf="user.profile_image" class="avatar" src="{{user.profile_image}}"> -->
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" [routerLink]="[ '/user-profile', _authService.userLoggedIn ]">View Profile</a>
+            <a class="dropdown-item" [routerLink]="[ '/accounts/edit' ]">Edit Profile</a>
+            <a class="dropdown-item" [routerLink]="[ '/accounts/change-password' ]">Change Password</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" style="cursor:pointer" *ngIf="_authService.checkToken()"
+              (click)="_authService.performLogout()">Log Out</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

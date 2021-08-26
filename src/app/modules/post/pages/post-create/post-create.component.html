@@ -1,0 +1,53 @@
+<div class="container" style="height: 100%;margin-bottom: 100px;" *ngIf="!isLoading">
+    <form style="margin-top: 15vh;align-items: center;">
+        <div class="form-group">
+
+            <div class="textarea-div mb-5">
+                <input type="text" placeholder="What are you thinking..." id="post_caption">
+                <button type="button" class="btn btn-primary float-right mt-3" (click)="onSubmit()">Submit</button>
+                <!-- emoji starts-->
+                <mat-icon class="emoji-icon" (click)="toggleEmoji()">sentiment_very_satisfied</mat-icon>
+                <emoji-mart id="emojiID" class="emoji-toggle" (emojiSelect)="addEmoji($event)" title="Pick your emoji…" emoji="point_up"
+                    color="green">
+                </emoji-mart>
+
+                <!-- emoji ends -->
+
+            </div>
+            <div style="width: 20%;">
+                <input type="file" #Image accept="image/*" multiple="false" (change)="fileChangeEvent($event)"
+                    style="display: none">
+                <a (click)="Image.click()" style="cursor: pointer">
+                  <mat-icon>add_a_photo</mat-icon>
+                  <span style="position:absolute;padding-top: 3px;">Add photo</span>
+                </a>
+
+                <!-- image cropper starts -->
+
+                <div>
+                    <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true"
+                        [aspectRatio]="1 / 1" [resizeToWidth]="1080" [resizeToHeight]="1080" [cropperMinWidth]="128"
+                        [onlyScaleDown]="true" [roundCropper]="false" format="jpg" outputType="base64"
+                        (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()"
+                        (cropperReady)="cropperReady()" (loadImageFailed)="loadImageFailed()"
+                        [style.display]="showCropper ? null : 'none'" [alignImage]="'left'"></image-cropper>
+
+                    <button (click)="flipHorizontal()">Flip horizontal</button>
+                    <button (click)="flipVertical()">Flip vertical</button>
+                    <button (click)="rotateRight()">Rotate right</button>
+                    <button (click)="rotateLeft()">Rotate left</button>
+
+                </div>
+                <!-- <img [src]="croppedImage" /> -->
+                <!-- image cropper ends  -->
+                <br />
+            </div>
+        </div>
+
+    </form>
+
+</div>
+<div fxLayout="row" fxLayoutAlign="space-around center" style="height:100%" *ngIf="isLoading">
+    <mat-spinner mode="indeterminate" diameter="50" strokeWidth="5" color="warn"></mat-spinner>
+    <!-- <mat-progress-bar mode="indeterminate"></mat-progress-bar> -->
+</div>

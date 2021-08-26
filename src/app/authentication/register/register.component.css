@@ -1,0 +1,27 @@
+.register-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.register-container > * {
+  width: 100%;
+}
+
+.register-right-align {
+  text-align: right;
+}
+
+input.register-right-align::-webkit-outer-spin-button,
+input.register-right-align::-webkit-inner-spin-button {
+  display: none;
+}
+
+input.register-right-align {
+  -moz-appearance: textfield;
+}
+
+.form-control:focus {
+  border-color: inherit;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}

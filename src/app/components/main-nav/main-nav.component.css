@@ -1,0 +1,43 @@
+nav {
+    /* border-bottom: 2px solid #00a9ff; */
+}
+
+nav .navbar-brand {
+    font-weight: 400;
+    letter-spacing: 1.5px;
+    word-spacing: 2px;
+    font-size: 1.5rem;
+}
+
+i {
+  font-size: 1.7rem;
+  vertical-align: middle;
+  margin-top: -4px;
+}
+
+mat-icon {
+    font-size: 1.5rem;
+    vertical-align: middle;
+    margin-top: -5px;
+}
+
+nav .navbar-collapse .navbar-nav li a {
+    font-weight: 400;
+    letter-spacing: 2px;
+}
+
+
+.custom-toggler.navbar-toggler {
+    border-color: rgb(0, 169, 255);
+}
+
+.custom-toggler .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(0, 169, 255, 0.8)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+
+/* .avatar {
+  vertical-align: middle;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+} */

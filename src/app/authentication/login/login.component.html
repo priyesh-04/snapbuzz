@@ -1,0 +1,37 @@
+<div class="container" style="margin-top: 110px;">
+  <div class="row">
+    <div class="col-md-6 mx-auto">
+      <div *ngIf="_authService.checkToken() === false">
+        <div class="card rounded-0">
+          <div class="card-header">
+            <h3 class="mb-0">Login</h3>
+          </div>
+          <div class="card-body">
+  
+            <form #f="ngForm" (ngSubmit)="doLogin(f)">
+  
+              <div class="login-container form-group">
+                <mat-form-field>
+                  <input matInput type="text" #username="ngModel" class="form-control rounded-0" [(ngModel)]="loginUserData.username"
+                    name="username" placeholder="Enter username" required>
+                </mat-form-field>
+              </div>
+              <div class="login-container form-group">
+                <mat-form-field>
+                  <input type="password" matInput #pass="ngModel" class="form-control rounded-0" [(ngModel)]="loginUserData.password"
+                    [type]="hide ? 'password' : 'text'" name="password" placeholder="Enter your password" required>
+                  <a mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  </a>
+                </mat-form-field>
+              </div>
+              <a routerLink="/register">Create new account ></a>
+              <button type="submit" class="btn btn-success float-right" [disabled]="!f.form.valid">Login</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
