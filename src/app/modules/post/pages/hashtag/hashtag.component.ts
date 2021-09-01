@@ -72,7 +72,7 @@ export class HashtagComponent implements OnInit {
     this._postService.postLike(id)
       .subscribe(
         res => {
-          console.log(res);
+          // console.log(res);
           this.ngOnInit();
         },
         err => console.log(err)
@@ -110,7 +110,7 @@ export class HashtagComponent implements OnInit {
       .subscribe(
         res => {
           this.ngOnInit();
-          console.log(res);
+          // console.log(res);
           f.resetForm();
         },
         err => console.log(err)

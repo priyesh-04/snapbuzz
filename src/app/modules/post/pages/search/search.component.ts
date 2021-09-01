@@ -67,7 +67,7 @@ export class SearchComponent implements OnInit {
     this._postService.postLike(id)
       .subscribe(
         res => {
-          console.log(res);
+          // console.log(res);
           this.ngOnInit();
         },
         err => this.isLoading = false

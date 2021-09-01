@@ -56,7 +56,7 @@ export class PostDetailComponent implements OnInit {
     this._postService.postLike(id)
       .subscribe(
         res => {
-          console.log(res);
+          // console.log(res);
           this.ngOnInit();
         },
         err => console.log(err)
@@ -93,7 +93,7 @@ export class PostDetailComponent implements OnInit {
       .subscribe(
         res => {
           this.ngOnInit();
-          console.log(res);
+          // console.log(res);
           this.comment_parent_id = '';
           f.resetForm();
         },

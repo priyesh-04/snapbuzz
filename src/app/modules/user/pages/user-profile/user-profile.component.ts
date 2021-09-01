@@ -79,7 +79,7 @@ export class UserProfileComponent implements OnInit {
       .subscribe(
         res => {
           this.taggedPosts = res;
-          console.log(res, 'taggedPosts');
+          // console.log(res, 'taggedPosts');
         },
         err => {
           console.log(err);
@@ -92,7 +92,7 @@ export class UserProfileComponent implements OnInit {
       .subscribe(
         res => {
             this.user = res;
-            console.log(this.user, 'user');
+            // console.log(this.user, 'user');
             this.following_list = res.following_list;
             this.followers_list = res.followers_list;
             const weFollow = this.following_list.map(d => d.username);
@@ -141,7 +141,7 @@ export class UserProfileComponent implements OnInit {
       .subscribe(
         res => {
           this.ngOnInit();
-          console.log(res, 'followed or unfollowed');
+          // console.log(res, 'followed or unfollowed');
         },
         err => {
           console.log(err);

@@ -71,7 +71,7 @@ export class PostEditComponent implements OnInit {
   }
   imageCropped(event: ImageCroppedEvent) {
     this.croppedImage = event.base64;
-    console.log(event);
+    // console.log(event);
   }
   imageLoaded() {
     this.showCropper = true;

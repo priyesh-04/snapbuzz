@@ -74,7 +74,7 @@ export class PostListComponent implements OnInit {
       .subscribe(
         res => {
           this.stories = res;
-          console.log(this.stories, 'stories');
+          // console.log(this.stories, 'stories');
           this.isLoading = false;
           this.addstory();
           this.isLoaded = true;
@@ -124,7 +124,7 @@ export class PostListComponent implements OnInit {
     this._postService.postLike(id)
       .subscribe(
         res => {
-          console.log(res);
+          // console.log(res);
           this.ngOnInit();
         },
         err => console.log(err)
@@ -172,7 +172,7 @@ export class PostListComponent implements OnInit {
 
   async fileChangeEvent(evt: any) {
     this.image = evt.target.files[0];
-    console.log(evt);
+    // console.log(evt);
     if (this.image.type !== 'image/jpeg' && this.image.type !== 'image/png') {
       alert('Image type should be either jpg, jpeg, or png');
       return;
@@ -186,7 +186,7 @@ export class PostListComponent implements OnInit {
     this._storiesService.create(this.contentData.caption, this.image)
       .subscribe(
         res => {
-          console.log(res, 'Story Created!!!');
+          // console.log(res, 'Story Created!!!');
           this.isLoading = false;
           this.ngOnInit();
         },
@@ -219,7 +219,7 @@ export class PostListComponent implements OnInit {
       .subscribe(
         res => {
           this.ngOnInit();
-          console.log(res);
+          // console.log(res);
           f.resetForm();
         },
         err => console.log(err)

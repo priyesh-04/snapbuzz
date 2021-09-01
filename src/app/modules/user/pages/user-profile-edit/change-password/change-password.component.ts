@@ -31,7 +31,7 @@ export class ChangePasswordComponent implements OnInit {
     this._userService.changePassword(this.passwordData, this.userLoggedIn)
       .subscribe(
         res => {
-          console.log(res);
+          // console.log(res);
           alert('Your Password was changed Successfully.');
           this._router.navigate(['/user-profile', this.userLoggedIn]);
         },
