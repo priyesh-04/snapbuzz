@@ -156,7 +156,7 @@
                     <mat-icon class="example-tab-icon">grid_on</mat-icon>
                     POSTS
                 </ng-template>
-                <div class="row">
+                <div class="row grid-pics">
                     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4 text-center mt-2 mb-2"
                         *ngFor="let post of posts">
                         <div class="hovereffect">
@@ -175,7 +175,7 @@
                     SAVED
                 </ng-template>
                 <ng-template matTabContent mat-tab-label>
-                    <div class="row">
+                    <div class="row grid-pics">
                         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4 text-center mt-2 mb-2"
                         *ngFor="let bkm of user.bookmarks">
                             <div class="hovereffect">
@@ -194,7 +194,7 @@
                     <mat-icon class="example-tab-icon">person_pin</mat-icon>
                     TAGGED
                 </ng-template>
-                <div class="row">
+                <div class="row grid-pics">
                     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4 text-center mt-2 mb-2" *ngFor="let tag_post of taggedPosts">
                         <div class="hovereffect">
                             <img class="img-responsive post-img" src="{{tag_post.picture}}">

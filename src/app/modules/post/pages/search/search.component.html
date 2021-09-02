@@ -14,6 +14,10 @@
 </div> <hr />
 
 <div class="container" style="margin-bottom: 120px;" *ngIf="!isLoading">
+    <div *ngIf="!data.search && results.length===0" class="search-something-div">
+      <h1 class="text-center"><mat-icon class="material-icons-outlined">north</mat-icon></h1>
+      <h1 class="text-center">Search Something</h1>
+    </div>
     <div class="row">
         <div class="col-lg-4">
             <div style="height: 100%;">
@@ -22,7 +26,7 @@
                     <h5 class="card-title text-center mb-4 mt-4">Users matched with <span class="text-success">{{data.search}}</span></h5>
                     <mat-card class="example-card">
                         <div *ngFor="let user of users">
-                            <a class="text-decoration-none" 
+                            <a class="text-decoration-none"
                             [routerLink]="[ '/user-profile', user.username ]">
                                 <mat-card-header>
                                     <img *ngIf="!user.profile_image" mat-card-avatar class="example-header-image"
@@ -34,7 +38,7 @@
                                     </mat-card-title>
                                     <mat-card-subtitle>@{{ user.username }}</mat-card-subtitle>
                                 </mat-card-header>
-                            </a> <hr />                   
+                            </a> <hr />
                         </div>
                     </mat-card>
                 </div>
@@ -45,7 +49,7 @@
                 <h5 class="mt-4 mb-4 text-center" *ngIf="results.length===0 && searched===true">No Posts matched with <span class="text-danger">{{data.search}}</span></h5>
                 <h5 class="mt-4 mb-4 text-center" *ngIf="results.length!==0">
                     Posts matched with <span class="text-success">{{data.search}}</span></h5>
-                <div *ngFor="let post of results">
+                <div *ngFor="let post of results" class="searched-posts">
                     <mat-card class="example-card">
                         <div>
                             <a class="text-decoration-none" [routerLink]="[ '/user-profile', post.user.username ]">
@@ -83,9 +87,9 @@
                                     </a>
                                 </mat-menu>
                             </div>
-        
+
                         </div>
-        
+
                         <img mat-card-image src="{{post.picture}}" alt="">
                         <mat-card-actions fxLayout="row" fxLayoutAlign="space-around start">
                             <a class="text-decoration-none" mat-button (click)="likePost(post.id)">
@@ -106,7 +110,7 @@
                                 </a>
                             </span>
                         </mat-card-content>
-        
+
                         <mat-card-footer>
                             <form class="comment-form" #f="ngForm" fxLayout="row">
                                 <input type="hidden" ngModel="post" name="model_type" required>

@@ -1,7 +1,7 @@
 .example-card {
   max-width: 614px;
   width: 100%;
-  margin-bottom: 50px;
+  margin-bottom: 150px;
 }
 
 .example-header-image {
@@ -46,10 +46,10 @@ form {
 }
 
 .menuItem {
-   text-decoration: none;
-   color: #000000;
- }
+  text-decoration: none;
+  color: #000000;
+}
 
- .replies-thread {
-   display: none;
- }
+.replies-thread {
+  display: none;
+}

@@ -1,9 +1,19 @@
+.search-something-div {
+  padding: 50px;
+  border: 1px solid #dc3545;
+  background-color: #dc3545;
+  margin: 100px;
+  color: #fff;
+}
+
 .example-card {
   max-width: 614px;
   width: 100%;
   margin-bottom: 50px;
 }
-
+.searched-posts:last-child {
+  margin-bottom: 150px;
+}
 .example-header-image {
   background-size: cover;
 }
@@ -39,6 +49,6 @@
 }
 
 .menuItem {
-   text-decoration: none;
-   color: #000000;
- }
+  text-decoration: none;
+  color: #000000;
+}

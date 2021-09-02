@@ -3,6 +3,9 @@
   width: 100%;
   margin-bottom: 50px;
 }
+.example-card:last-child {
+  margin-bottom: 150px;
+}
 
 .example-header-image {
   background-size: cover;
@@ -45,21 +48,21 @@
 }
 
 .menuItem {
-   text-decoration: none;
-   color: #000000;
- }
+  text-decoration: none;
+  color: #000000;
+}
 
- .stories_section {
-   background-color: lightgray;
-   padding: 10px;
-   border-radius: 10px;
-   border: 1px solid grey;
- }
+.stories_section {
+  background-color: lightgray;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid grey;
+}
 
- .toggle-story {
-   display: none;
- }
+.toggle-story {
+  display: none;
+}
 
- .toggle-suggestion {
-   display: none;
- }
+.toggle-suggestion {
+  display: none;
+}
